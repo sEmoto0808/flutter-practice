@@ -12,4 +12,9 @@ class Item {
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
 
   Map<String, dynamic> toJson() => _$ItemToJson(this);
+
+  @override
+  String toString() {
+    return "Item: { id: $id, title: $title }";
+  }
 }

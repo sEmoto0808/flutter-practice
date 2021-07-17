@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+import 'item.dart';
 
 void main() {
   runApp(MyApp());
@@ -43,9 +47,12 @@ class _MyHomePageState extends State<MyHomePage> {
     String body = response.body;
     int statusCode = response.statusCode;
 
+    List<dynamic> itemMap = jsonDecode(body);
+    var item = Item.fromJson(itemMap[0]);
+
     debugPrint('======================');
-    debugPrint('body: {$body}');
-    debugPrint('statusCode: {$statusCode}');
+    print('body: $item');
+    debugPrint('statusCode: $statusCode');
     debugPrint('======================');
 
     setState(() {
