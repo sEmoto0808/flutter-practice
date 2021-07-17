@@ -48,7 +48,8 @@ class _MyHomePageState extends State<MyHomePage> {
     int statusCode = response.statusCode;
 
     List<dynamic> itemMap = jsonDecode(body);
-    var item = Item.fromJson(itemMap[0]);
+    var items = itemMap.map((i) => Item.fromJson(i)).toList();
+    var item = items[0];
 
     debugPrint('======================');
     print('body: $item');
