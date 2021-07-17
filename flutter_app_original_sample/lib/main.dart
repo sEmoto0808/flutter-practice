@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(MyApp());
@@ -29,7 +30,24 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
+  Future<void> _requestHttp() async {
+
+    // Qiita APIにHTTPリクエストを送る（GET）
+    final params = {
+      'page': '1',
+      'per_page': '20'
+    };
+    final uri = Uri.https('qiita.com', '/api/v2/items', params);
+    http.Response response = await http.get(uri);
+
+    String body = response.body;
+    int statusCode = response.statusCode;
+
+    debugPrint('======================');
+    debugPrint('body: {$body}');
+    debugPrint('statusCode: {$statusCode}');
+    debugPrint('======================');
+
     setState(() {
       _counter++;
     });
@@ -56,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: _requestHttp,
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
