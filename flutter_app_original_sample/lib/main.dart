@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app_original_sample/widget/MyListView.dart';
 import 'package:http/http.dart' as http;
 
-import 'item.dart';
+import 'entity/item.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,13 +33,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int page = 1;
+  List<Item> list = [];
 
   Future<void> _requestHttp() async {
 
     // Qiita APIにHTTPリクエストを送る（GET）
     final params = {
-      'page': '1',
+      'page': '$page',
       'per_page': '20'
     };
     final uri = Uri.https('qiita.com', '/api/v2/items', params);
@@ -57,7 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
     debugPrint('======================');
 
     setState(() {
-      _counter++;
+      list.addAll(items);
+      page++;
     });
   }
 
@@ -68,22 +71,10 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+        child: MyListView(list: list,),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _requestHttp,
-        tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
     );
