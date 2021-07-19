@@ -23,3 +23,22 @@ class _MyListViewState extends State<MyListView> {
     );
   }
 }
+
+
+class MyListView2 extends StatelessWidget {
+  MyListView2({Key? key, required this.list}) : super(key: key);
+
+  final List<Item> list;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ListView.builder(
+        itemBuilder: (BuildContext context, int index) {
+          return Text(list[index].title);
+        },
+        itemCount: list.length,
+      ),
+    );
+  }
+}
