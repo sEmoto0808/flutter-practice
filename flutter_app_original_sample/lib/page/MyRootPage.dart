@@ -64,7 +64,7 @@ class _MyRootPageState extends State<MyRootPage> with SingleTickerProviderStateM
         }).toList(),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => controller.navigateToNextPage(),
+        onPressed: () => controller.requestHttp(),
         child: Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -86,7 +86,17 @@ class _MyRootPageState extends State<MyRootPage> with SingleTickerProviderStateM
                   },
                   itemCount: controller.list.length,
                 ),
-              )));
+              )
+          )
+      );
+    } else if(tab.text == 'Two') {
+      return Center(
+        child: TextButton(
+          child: Text('Next Page'),
+          style: TextButton.styleFrom(backgroundColor: Colors.grey),
+          onPressed: () => controller.navigateToNextPage(),
+        ),
+      );
     } else {
       return Center(
         child: Text(
