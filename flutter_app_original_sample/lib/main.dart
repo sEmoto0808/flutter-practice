@@ -20,11 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => MyRootPage(title: 'Flutter Demo Home Page'),
-        '/next': (context) => NextPage(),
-      },
+      home: MyRootPage(title: 'Flutter Demo Home Page'),
     );
   }
 }
