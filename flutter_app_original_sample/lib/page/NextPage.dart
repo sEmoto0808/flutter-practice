@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 class NextPage extends StatelessWidget {
 
-  final arguments = Get.arguments as String?;
+  final arguments = Get.arguments as Map<String, String>?;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class NextPage extends StatelessWidget {
       ),
       body: Center(
         child: Text(
-          '$arguments',
+          "${arguments!['arg1']}",
           style: TextStyle(fontSize: 22),
         ),
       ),

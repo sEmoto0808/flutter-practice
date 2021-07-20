@@ -17,7 +17,9 @@ class MyRootNavigator {
   void toNextPageByGetPackage() {
     Get.to(
         () => NextPage(),
-        arguments: '値渡し'
+        arguments: {
+          'arg1': '値渡し'
+        }
     );
   }
 }
