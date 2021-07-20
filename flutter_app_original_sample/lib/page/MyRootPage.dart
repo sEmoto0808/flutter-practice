@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app_original_sample/controller/MyController.dart';
+import 'package:flutter_app_original_sample/page/NextPage.dart';
 import 'package:get/get.dart';
 
 class MyRootPage extends StatelessWidget {
@@ -30,9 +31,19 @@ class MyRootPage extends StatelessWidget {
         )
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: controller.requestHttp,
+        onPressed: () {
+          _navigateToNextPage(context);
+        },
         child: Icon(Icons.add),
       ),
+    );
+  }
+
+  void _navigateToNextPage(BuildContext context) {
+    // Navigatorで画面遷移（基本）
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => NextPage())
     );
   }
 }
