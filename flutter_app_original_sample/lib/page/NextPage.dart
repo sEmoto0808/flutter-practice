@@ -1,7 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NextPage extends StatelessWidget {
+
+  final arguments = Get.arguments as String?;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,7 +14,7 @@ class NextPage extends StatelessWidget {
       ),
       body: Center(
         child: Text(
-          '画面遷移',
+          '$arguments',
           style: TextStyle(fontSize: 22),
         ),
       ),
