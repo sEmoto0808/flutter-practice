@@ -31,22 +31,10 @@ class MyRootPage extends StatelessWidget {
         )
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _navigateToNextPage(context);
-        },
+        onPressed: () => controller.navigateToNextPage(),
         child: Icon(Icons.add),
       ),
     );
   }
 
-  void _navigateToNextPage(BuildContext context) {
-    // // Navigatorで画面遷移（基本）
-    // // Route Mapで画面遷移（基本）
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => NextPage())
-    // );
-
-    Get.to(NextPage());
-  }
 }

@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app_original_sample/page/MyRootPage.dart';
-import 'package:flutter_app_original_sample/page/NextPage.dart';
 import 'package:get/get.dart';
 
 void main() {

@@ -1,6 +1,7 @@
 
 import 'package:flutter_app_original_sample/data/MyRepository.dart';
 import 'package:flutter_app_original_sample/entity/item.dart';
+import 'package:flutter_app_original_sample/navigator/MyRootNavigator.dart';
 import 'package:get/get.dart';
 
 class MyController extends GetxController {
@@ -9,7 +10,8 @@ class MyController extends GetxController {
   var page = 1;
   var list = <Item>[].obs;
 
-  final repository = MyRepository();
+  final _repository = MyRepository();
+  final _navigator = MyRootNavigator();
 
   // Logic
   void requestHttp() async {
@@ -19,9 +21,13 @@ class MyController extends GetxController {
       'per_page': '20'
     };
 
-    var items = await repository.getItems('/api/v2/items', params);
+    var items = await _repository.getItems('/api/v2/items', params);
 
     list.addAll(items);
     page++;
+  }
+
+  void navigateToNextPage() {
+    _navigator.toNextPageByGetPackage();
   }
 }
