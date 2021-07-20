@@ -41,9 +41,7 @@ class MyRootPage extends StatelessWidget {
 
   void _navigateToNextPage(BuildContext context) {
     // Navigatorで画面遷移（基本）
-    Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => NextPage())
-    );
+    // Route Mapで画面遷移（基本）
+    Navigator.pushNamed(context, '/next');
   }
 }

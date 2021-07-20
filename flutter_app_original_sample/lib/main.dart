@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app_original_sample/page/MyRootPage.dart';
+import 'package:flutter_app_original_sample/page/NextPage.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -19,7 +20,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyRootPage(title: 'Flutter Demo Home Page'),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MyRootPage(title: 'Flutter Demo Home Page'),
+        '/next': (context) => NextPage(),
+      },
     );
   }
 }
