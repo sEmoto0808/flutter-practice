@@ -78,17 +78,33 @@ class _MyRootPageState extends State<MyRootPage> with SingleTickerProviderStateM
 
   Widget _createTab(Tab tab) {
     if (tab.text == 'One') {
-      return RefreshIndicator(
-          onRefresh: _onRefresh,
-          child: Obx(() => Scaffold(
-            body: ListView.builder(
-              itemBuilder: (BuildContext context, int index) {
-                return Text('No.$index: ' + controller.list[index].title);
-              },
-              itemCount: controller.list.length,
+      return NotificationListener(
+        onNotification: (scrollNotification) {
+          if (controller.page == 1) {
+            return true;
+          }
+          if (scrollNotification is ScrollEndNotification) {
+            final scrollProportion =
+                scrollNotification.metrics.pixels / scrollNotification.metrics.maxScrollExtent;
+
+            if (scrollProportion >= 1.0) {
+              controller.requestHttp();
+            }
+          }
+          return false;
+        },
+          child: RefreshIndicator(
+            onRefresh: _onRefresh,
+            child: Obx(() => Scaffold(
+              body: ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  return Text('No.$index: ' + controller.list[index].title);
+                },
+                itemCount: controller.list.length,
+              ),
+            )
             ),
           )
-          ),
       );
     } else if(tab.text == 'Two') {
       return Center(

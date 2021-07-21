@@ -37,7 +37,9 @@ class MyController extends GetxController {
     var items = await _repository.getItems('/api/v2/items', params);
 
     var listLength = list.length;
-    list.removeRange(0, listLength - 1);
+    if (listLength > 0) {
+      list.removeRange(0, listLength - 1);
+    }
 
     list.addAll(items);
     page++;
