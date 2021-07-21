@@ -78,16 +78,17 @@ class _MyRootPageState extends State<MyRootPage> with SingleTickerProviderStateM
 
   Widget _createTab(Tab tab) {
     if (tab.text == 'One') {
-      return Center(
+      return RefreshIndicator(
+          onRefresh: _onRefresh,
           child: Obx(() => Scaffold(
-                body: ListView.builder(
-                  itemBuilder: (BuildContext context, int index) {
-                    return Text(controller.list[index].title);
-                  },
-                  itemCount: controller.list.length,
-                ),
-              )
+            body: ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                return Text('No.$index: ' + controller.list[index].title);
+              },
+              itemCount: controller.list.length,
+            ),
           )
+          ),
       );
     } else if(tab.text == 'Two') {
       return Center(
@@ -105,5 +106,9 @@ class _MyRootPageState extends State<MyRootPage> with SingleTickerProviderStateM
         ),
       );
     }
+  }
+
+  Future<void> _onRefresh() async {
+    controller.refresh();
   }
 }

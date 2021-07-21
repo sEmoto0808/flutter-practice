@@ -27,6 +27,22 @@ class MyController extends GetxController {
     page++;
   }
 
+  void refresh() async {
+    page = 1;
+    final params = {
+      'page': '$page',
+      'per_page': '20'
+    };
+
+    var items = await _repository.getItems('/api/v2/items', params);
+
+    var listLength = list.length;
+    list.removeRange(0, listLength - 1);
+
+    list.addAll(items);
+    page++;
+  }
+
   void navigateToNextPage() {
     _navigator.toNextPageByGetPackage();
   }
