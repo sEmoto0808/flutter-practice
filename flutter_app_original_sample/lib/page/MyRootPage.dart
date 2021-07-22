@@ -125,10 +125,31 @@ class _MyRootPageState extends State<MyRootPage> with SingleTickerProviderStateM
                       );
                       print(result);
                     },
-                    onLongPress: () {
-                      print('========================');
-                      print('ListView on Long Press.');
-                      print('========================');
+                    onLongPress: () async {
+                      var result = await showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return SimpleDialog(
+                            title: Text('No.$index: ' + controller.list[index].title),
+                            children: [
+                              SimpleDialogOption(
+                                  onPressed: () => Navigator.of(context).pop('select Option1'),
+                                  child: Text('Option1')
+                              ),
+                              SimpleDialogOption(
+                                  onPressed: () => Navigator.of(context).pop('select Option2'),
+                                  child: Text('Option2')
+                              ),
+                              SimpleDialogOption(
+                                  onPressed: () => Navigator.of(context).pop('select Option3'),
+                                  child: Text('Option3')
+                              )
+                            ],
+                          );
+                        },
+                        barrierDismissible: false,
+                      );
+                      print(result);
                     },
                   );
                 },
