@@ -97,15 +97,33 @@ class _MyRootPageState extends State<MyRootPage> with SingleTickerProviderStateM
             onRefresh: _onRefresh,
             child: Obx(() => Scaffold(
               body: ListView.separated(
-                separatorBuilder: (BuildContext context, int index) => Divider(color: Colors.black,),
+                separatorBuilder: (BuildContext context, int index) => Divider(color: Colors.blueGrey,),
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
                     leading: Icon(Icons.flutter_dash),
                     title: Text('No.$index: ' + controller.list[index].title),
-                    onTap: () {
-                      print('========================');
-                      print('ListView on Tap.');
-                      print('========================');
+                    onTap: () async {
+                      var result = await showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('No.$index'),
+                              content: Text(controller.list[index].title),
+                              actions: [
+                                TextButton(
+                                    onPressed: () => Navigator.of(context).pop('Cancel: ' + controller.list[index].title),
+                                    child: Text('Cancel')
+                                ),
+                                TextButton(
+                                    onPressed: () => Navigator.of(context).pop('OK: ' + controller.list[index].title),
+                                    child: Text('OK')
+                                )
+                              ],
+                            );
+                          },
+                        barrierDismissible: false,
+                      );
+                      print(result);
                     },
                     onLongPress: () {
                       print('========================');
