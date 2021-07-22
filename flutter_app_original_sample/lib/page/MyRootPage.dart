@@ -96,9 +96,23 @@ class _MyRootPageState extends State<MyRootPage> with SingleTickerProviderStateM
           child: RefreshIndicator(
             onRefresh: _onRefresh,
             child: Obx(() => Scaffold(
-              body: ListView.builder(
+              body: ListView.separated(
+                separatorBuilder: (BuildContext context, int index) => Divider(color: Colors.black,),
                 itemBuilder: (BuildContext context, int index) {
-                  return Text('No.$index: ' + controller.list[index].title);
+                  return ListTile(
+                    leading: Icon(Icons.flutter_dash),
+                    title: Text('No.$index: ' + controller.list[index].title),
+                    onTap: () {
+                      print('========================');
+                      print('ListView on Tap.');
+                      print('========================');
+                    },
+                    onLongPress: () {
+                      print('========================');
+                      print('ListView on Long Press.');
+                      print('========================');
+                    },
+                  );
                 },
                 itemCount: controller.list.length,
               ),
