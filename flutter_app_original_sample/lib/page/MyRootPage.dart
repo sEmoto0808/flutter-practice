@@ -88,6 +88,18 @@ class _MyRootPageState extends State<MyRootPage> with SingleTickerProviderStateM
           onPressed: () => controller.navigateToNextPage(),
         ),
       );
+    } else if(tab.text == 'Three') {
+      return Center(
+          child: Column(
+            children: [
+              Image.asset('images/apple.png'),
+              FadeInImage.assetNetwork(
+                placeholder: 'images/placeholder.png',
+                image: 'https://1.bp.blogspot.com/-ZOg0qAG4ewU/Xub_uw6q0DI/AAAAAAABZio/MshyuVBpHUgaOKJtL47LmVkCf5Vge6MQQCNcBGAsYHQ/s1600/pose_pien_uruuru_woman.png',
+              ),
+            ],
+          )
+      );
     } else {
       return Center(
         child: Text(
