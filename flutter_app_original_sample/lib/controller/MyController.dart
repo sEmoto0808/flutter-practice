@@ -48,4 +48,8 @@ class MyController extends GetxController {
   void navigateToNextPage() {
     _navigator.toNextPageByGetPackage();
   }
+
+  void navigateToNextPageAppBarCustom() {
+    _navigator.toNextPageAppBarCustomByGetPackage();
+  }
 }

@@ -102,9 +102,10 @@ class _MyRootPageState extends State<MyRootPage> with SingleTickerProviderStateM
       );
     } else {
       return Center(
-        child: Text(
-          tab.text!,
-          style: TextStyle(fontSize: 22),
+        child: TextButton(
+          child: Text('Next Page AppBar Custom'),
+          style: TextButton.styleFrom(backgroundColor: Colors.grey),
+          onPressed: () => controller.navigateToNextPageAppBarCustom(),
         ),
       );
     }
