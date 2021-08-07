@@ -15,15 +15,14 @@ class _MyListViewState extends State<MyListView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-          itemBuilder: (BuildContext context, int index) {
-            return Text(widget.list[index].title);
-          },
+        itemBuilder: (BuildContext context, int index) {
+          return Text(widget.list[index].title);
+        },
         itemCount: widget.list.length,
       ),
     );
   }
 }
-
 
 class MyListView2 extends StatelessWidget {
   MyListView2({Key? key, required this.list}) : super(key: key);
