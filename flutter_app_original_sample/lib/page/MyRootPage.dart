@@ -1,3 +1,4 @@
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app_original_sample/controller/MyController.dart';
@@ -13,8 +14,8 @@ class MyRootPage extends StatefulWidget {
   _MyRootPageState createState() => _MyRootPageState();
 }
 
-class _MyRootPageState extends State<MyRootPage> with SingleTickerProviderStateMixin {
-
+class _MyRootPageState extends State<MyRootPage>
+    with SingleTickerProviderStateMixin {
   // DI
   final controller = Get.put(MyController());
 
@@ -60,9 +61,11 @@ class _MyRootPageState extends State<MyRootPage> with SingleTickerProviderStateM
       ),
       body: TabBarView(
         controller: _tabController,
-        children: _tabs.map((tab) {
-          return _createTab(tab);
-        }).toList(),
+        children: _tabs.map(
+          (tab) {
+            return _createTab(tab);
+          },
+        ).toList(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => controller.requestHttp(),
@@ -73,14 +76,14 @@ class _MyRootPageState extends State<MyRootPage> with SingleTickerProviderStateM
         backgroundColor: Colors.green,
         currentIndex: 0,
         items: _bottomNavigationItems,
-      )
+      ),
     );
   }
 
   Widget _createTab(Tab tab) {
     if (tab.text == 'One') {
       return FirstTabPage();
-    } else if(tab.text == 'Two') {
+    } else if (tab.text == 'Two') {
       return Center(
         child: TextButton(
           child: Text('Next Page'),
@@ -88,7 +91,7 @@ class _MyRootPageState extends State<MyRootPage> with SingleTickerProviderStateM
           onPressed: () => controller.navigateToNextPage(),
         ),
       );
-    } else if(tab.text == 'Three') {
+    } else if (tab.text == 'Three') {
       return _thirdPage();
     } else {
       return Center(
@@ -101,6 +104,46 @@ class _MyRootPageState extends State<MyRootPage> with SingleTickerProviderStateM
     }
   }
 
+  Widget _practiceFutureBuilder(BuildContext context) {
+    return Center(
+      child: FutureBuilder(
+        future: _getFutureValue(),
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+          if (snapshot.connectionState != ConnectionState.done) {
+            return CircularProgressIndicator();
+          }
+
+          if (snapshot.hasError) {
+            return Text(snapshot.error.toString());
+          }
+
+          if (snapshot.hasData) {
+            return Text(snapshot.data!);
+          } else {
+            return Text('データが存在しません');
+          }
+        },
+      ),
+    );
+  }
+
+  Future<String> _getFutureValue() async {
+    await Future.delayed(
+      Duration(seconds: 1),
+    );
+
+    final isFailed = Random().nextBool();
+
+    if (isFailed) {
+      try {
+        throw Exception('データの取得に失敗しました。');
+      } catch (error) {
+        return Future.error(error);
+      }
+    } else {
+      return Future.value('データの取得に成功しました。');
+    }
+  }
 }
 
 /// ScrollViewと画像
@@ -111,7 +154,8 @@ Widget _thirdPage() {
         Image.asset('assets/images/apple.png'),
         FadeInImage.assetNetwork(
           placeholder: 'assets/images/placeholder.png',
-          image: 'https://1.bp.blogspot.com/-ZOg0qAG4ewU/Xub_uw6q0DI/AAAAAAABZio/MshyuVBpHUgaOKJtL47LmVkCf5Vge6MQQCNcBGAsYHQ/s1600/pose_pien_uruuru_woman.png',
+          image:
+              'https://1.bp.blogspot.com/-ZOg0qAG4ewU/Xub_uw6q0DI/AAAAAAABZio/MshyuVBpHUgaOKJtL47LmVkCf5Vge6MQQCNcBGAsYHQ/s1600/pose_pien_uruuru_woman.png',
         ),
       ],
     ),
